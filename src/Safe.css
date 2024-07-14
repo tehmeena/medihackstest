@@ -1,0 +1,36 @@
+.safety-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.safety-section h2 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.safety-section form {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.safety-section label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.safety-section label input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.safety-section select {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0 15px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}

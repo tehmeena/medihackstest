@@ -1,17 +1,22 @@
+//forms for logging and signing up initially 
 import React from 'react';
 
 const LoginForm = ({ handleToggleForm, handleLoginSubmit }) => (
     <div className="form-container">
         <h2>Login</h2>
         <form onSubmit={handleLoginSubmit}>
-            <label htmlFor="login-username">Username:</label>
-            <input type="text" id="login-username" name="login-username" required />
+            <div className="form-group">
+                <label htmlFor="login-username">Username:</label>
+                <input type="text" id="login-username" name="login-username" required />
+            </div>
 
-            <label htmlFor="login-password">Password:</label>
-            <input type="password" id="login-password" name="login-password" required />
+            <div className="form-group">
+                <label htmlFor="login-password">Password:</label>
+                <input type="password" id="login-password" name="login-password" required />
+            </div>
 
             <button type="submit">Login</button>
-            <p>Don't have an account? <button onClick={handleToggleForm}>Sign Up</button></p>
+            <p>Don't have an account? <button type="button" onClick={handleToggleForm}>Sign Up</button></p>
         </form>
     </div>
 );
@@ -19,82 +24,101 @@ const LoginForm = ({ handleToggleForm, handleLoginSubmit }) => (
 const SignUpForm = ({ handleToggleForm, handleSignupFormSubmit }) => (
     <div className="form-container">
         <h2>Sign Up</h2>
+        console.log("Signup button clicked");
         <form onSubmit={handleSignupFormSubmit}>
             {/* Name Fields */}
-            <h3>Please enter your full legal name.</h3>
-            <label htmlFor="signup-firstname">Given Name (First Name):</label>
-            <input type="text" id="signup-firstname" name="signup-firstname" required />
+            <div className="form-group">
+                <h3>Please enter your full legal name.</h3>
+                <label htmlFor="signup-firstname">Given Name (First Name):</label>
+                <input type="text" id="signup-firstname" name="signup-firstname" required />
 
-            <label htmlFor="signup-middlename">Middle Name:</label>
-            <input type="text" id="signup-middlename" name="signup-middlename" />
+                <label htmlFor="signup-middlename">Middle Name:</label>
+                <input type="text" id="signup-middlename" name="signup-middlename" />
 
-            <label htmlFor="signup-surname">Surname (Last Name):</label>
-            <input type="text" id="signup-surname" name="signup-surname" required />
+                <label htmlFor="signup-surname">Surname (Last Name):</label>
+                <input type="text" id="signup-surname" name="signup-surname" required />
+            </div>
 
             {/* DOB Field */}
-            <h3>Please enter your date of birth</h3>
-            <label htmlFor="signup-dob">Date of Birth:</label>
-            <input type="date" id="signup-dob" name="signup-dob" required />
+            <div className="form-group">
+                <h3>Please enter your date of birth</h3>
+                <label htmlFor="signup-dob">Date of Birth:</label>
+                <input type="date" id="signup-dob" name="signup-dob" required />
+            </div>
 
             {/* Gender */}
-            <h3>Please enter your gender identity</h3>
-            <select id="signup-gender" name="signup-gender" required>
-                <option value="" disabled selected>Select your gender</option>
-                <option value="woman">Woman</option>
-                <option value="man">Man</option>
-                <option value="transwoman">Transgender Woman</option>
-                <option value="transman">Transgender Man</option>
-                <option value="intersex">Intersex</option>
-                <option value="twospirit">Two Spirit</option>
-                <option value="non-binary">Non-Binary</option>
-                <option value="prefer-not-to-say">Prefer not to say</option>
-                <option value="other">Other</option>
-            </select>
+            <div className="form-group">
+                <h3>Please enter your gender identity</h3>
+                <select id="signup-gender" name="signup-gender" required>
+                    <option value="" disabled selected>Select your gender</option>
+                    <option value="woman">Woman</option>
+                    <option value="man">Man</option>
+                    <option value="transwoman">Transgender Woman</option>
+                    <option value="transman">Transgender Man</option>
+                    <option value="intersex">Intersex</option>
+                    <option value="twospirit">Two Spirit</option>
+                    <option value="non-binary">Non-Binary</option>
+                    <option value="prefer-not-to-say">Prefer not to say</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
 
             {/* Country */}
-            <h3>Please enter your country of residence</h3>
-            <select id="signup-country" name="signup-country" required>
-                <option value="" disabled selected>Select your country</option>
-                <option value="unitedstates">United States</option>
-            </select>
+            <div className="form-group">
+                <h3>Please enter your country of residence</h3>
+                <select id="signup-country" name="signup-country" required>
+                    <option value="" disabled selected>Select your country</option>
+                    <option value="unitedstates">United States</option>
+                </select>
+            </div>
 
             {/* Email Field */}
-            <h3>Please enter a valid email address</h3>
-            <label htmlFor="signup-email">Email:</label>
-            <input type="email" id="signup-email" name="signup-email" required />
+            <div className="form-group">
+                <h3>Please enter a valid email address</h3>
+                <label htmlFor="signup-email">Email:</label>
+                <input type="email" id="signup-email" name="signup-email" required />
+            </div>
 
             {/* Phone Number */}
-            <h3>Please enter a valid phone number</h3>
-            <label htmlFor="signup-phone">Phone Number:</label>
-            <input type="tel" id="signup-phone" name="signup-phone" pattern="[0-9]*" required />
+            <div className="form-group">
+                <h3>Please enter a valid phone number</h3>
+                <label htmlFor="signup-phone">Phone Number:</label>
+                <input type="tel" id="signup-phone" name="signup-phone" pattern="[0-9]*" required />
+            </div>
 
             {/* Username and Password Fields */}
-            <h3>Please create a username and password.</h3>
-            <p>Username must include at least one letter. Usernames can start with a letter or number and can only include letters, numbers, periods, and underscores.</p>
-            <p>Password must be 8-20 characters long and include at least one letter, one number, and one of the following special symbols: !@#$%&*(),.?</p>
+            <div className="form-group">
+                <h3>Please create a username and password.</h3>
+                <p>Username must include at least one letter. Usernames can start with a letter or number and can only include letters, numbers, periods, and underscores.</p>
+                <p>Password must be 8-20 characters long and include at least one letter, one number, and one of the following special symbols: !@#$%&*(),.?</p>
 
-            <label htmlFor="signup-username">Username:</label>
-            <input type="text" id="signup-username" name="signup-username" pattern="[a-zA-Z0-9][a-zA-Z0-9_\.]{1,}" minLength="2" required />
+                <label htmlFor="signup-username">Username:</label>
+                <input type="text" id="signup-username" name="signup-username" pattern="[a-zA-Z0-9][a-zA-Z0-9_\.]{1,}" minLength="2" required />
 
-            <label htmlFor="signup-password">Password:</label>
-            <input type="password" id="signup-password" name="signup-password" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%&*(),.?])[A-Za-z\d!@#$%&*(),.?]{8,20}$" required />
+                <label htmlFor="signup-password">Password:</label>
+                <input type="password" id="signup-password" name="signup-password" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%&*(),.?])[A-Za-z\d!@#$%&*(),.?]{8,20}$" required />
+            </div>
 
             {/* Terms and Conditions Checkbox */}
-            <label>
-                <input type="checkbox" required /> I agree to the terms and conditions
-            </label>
+            <div className="form-group">
+                <input type="checkbox" id="terms-checkbox" required />
+                <label htmlFor="terms-checkbox">I agree to the terms and conditions</label>
+            </div>
 
             <button type="submit">Sign Up</button>
             <p>Already have an account? <button onClick={handleToggleForm}>Login</button></p>
+
+
         </form>
     </div>
 );
 
+//assign user roles after the sign up! this will later help tailor their experience a bit on the app
 const RoleForm = ({ selectedRole, selectedProfession, handleRoleChange, handleRoleFormSubmit }) => (
     <div className="form-container">
         <h2>Select Your Role</h2>
         <form onSubmit={handleRoleFormSubmit}>
-            <div id="role-selection">
+            <div className="form-group" id="role-selection">
                 <label htmlFor="role">Select Your Role:</label>
                 <select id="role" name="role" value={selectedRole} onChange={handleRoleChange} required>
                     <option value="" disabled>Select your role</option>
@@ -106,16 +130,16 @@ const RoleForm = ({ selectedRole, selectedProfession, handleRoleChange, handleRo
                 </select>
             </div>
 
-            {/*role-specific questions based on the selected role */}
+            {/* Role-specific questions based on the selected role */}
             {selectedRole === 'pregnant' && (
-                <div id="pregnant-questions">
+                <div className="form-group" id="pregnant-questions">
                     <label htmlFor="weeks">How many weeks have you been pregnant?</label>
                     <input type="number" id="weeks" name="weeks" />
                 </div>
             )}
 
             {selectedRole === 'provider' && (
-                <div id="provider-questions">
+                <div className="form-group" id="provider-questions">
                     <h3>Please select your profession</h3>
                     <select id="profession" name="profession" value={selectedProfession} onChange={handleRoleChange} required>
                         <option value="" disabled>Select your profession</option>
@@ -141,7 +165,7 @@ const RoleForm = ({ selectedRole, selectedProfession, handleRoleChange, handleRo
                 </div>
             )}
 
-            {/* shows submit button only when a role is selected */}
+            {/* Show submit button only when a role is selected */}
             {selectedRole && (
                 <button type="submit">Submit</button>
             )}

@@ -1,0 +1,17 @@
+.map-container {
+    width: 300px;
+    margin: auto;
+    margin-top: -400px;
+    margin-right: 50px; /* Adjust margin-left for shifting to the left */
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.map-container .leaflet-container {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px; /* Apply same border radius as container */
+}

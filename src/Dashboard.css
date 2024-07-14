@@ -1,0 +1,301 @@
+.bold {
+    font-weight: bold;
+}
+
+.dashboard-layout {
+    display: flex;
+    height: 100vh; /* Set the height of the dashboard to full viewport height */
+}
+
+/*menu on the left side of the screen*/
+.menu {
+    width: 200px;
+    background-color: #171401;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    left: 0; 
+    top: 0; 
+    height: 100%;
+    overflow-y: auto; 
+}
+
+.content-area {
+    flex-grow: 1;
+    padding: 20px;
+    margin-left: 200px; /* Adjust content area to leave space for the menu */
+    overflow-y: auto; 
+}
+
+.menu button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-left:0px;
+    border: none;
+    background-color: #5a8746;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.3s ease;
+}
+
+.menu button:hover {
+    background-color: #3c622b;
+}
+
+/*keeps content from being just covered by the menu options*/
+.content-area {
+    flex-grow: 1;
+    padding: 100px; 
+    margin-left: 200px; 
+    overflow-y: auto; 
+}
+
+
+/* Community section of dashboard */
+.community-section {
+    display: flex;
+    flex-direction: column; /* Stack items vertically on smaller screens */
+    gap: 20px; /* Space between items */
+  }
+  
+  .community-section .left-side,
+  .community-section .right-side {
+    background-color: #ffffff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .community-section .left-side {
+    max-width: 100%; /* Occupy full width on smaller screens */
+    width: 100%;
+  }
+  
+  .community-section .right-side {
+    max-width: 100%; /* Occupy full width on smaller screens */
+    width: 100%;
+  }
+  
+  .community-section .chatbox,
+  .community-section .connections-panel,
+  .community-section .top-container,
+  .community-section .bottom-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .community-section .connection-circle {
+    width: 30px;
+    height: 30px;
+    background-color: #ddd;
+    border-radius: 50%;
+    margin-bottom: 5px;
+  }
+  
+  /* Responsive adjustments */
+  @media (min-width: 768px) {
+    .community-section {
+      flex-direction: row; /* Ensure horizontal layout on larger screens */
+    }
+  
+    .community-section .left-side {
+      flex: 1; /* Take up proportionate space */
+      margin-right: 20px; /* Space between left and right sides */
+    }
+  
+    .community-section .right-side {
+      flex: 2; /* Take up more space than left side */
+    }
+  }
+
+  /* Local Resources Section */
+  .info-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.info-card {
+    max-height: 400px; 
+    overflow-y: auto;
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+}
+
+.info-card h3, .info-card h4 {
+    color: #5a8746;
+}
+
+.info-card a {
+    color: #5a8746;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.info-card a:hover {
+    text-decoration: underline;
+}
+
+.info-card p {
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.sos-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/*SOS button in the safety section of the dashboard*/
+.sos-button {
+    width: 100px;
+    height: 100px;
+    background-color: #ff0000;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.sos-button:hover {
+    background-color: #cc0000;
+}
+
+.sos-text {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 16px;
+    color: #333;
+    max-width: 600px;
+    line-height: 1.5;
+}
+
+/*Alerts styling for the Community section in the dashboard*/
+.bottom-container {
+    background-color: #fff; /* White background */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+.bottom-container h3 {
+    margin-top: 0; /* Remove top margin for h3 */
+    color: #5a8746; /* Dark green text color */
+    font-size: 1.5rem; /* Larger font size */
+    text-align: center; /* Center align text */
+    padding-bottom: 10px; /* Add padding below h3 */
+}
+
+#alert {
+    background-color: #ffcccc; /* Light red background */
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px; /* Rounded corners */
+}
+
+#alert strong {
+    font-weight: bold; /* Bold text */
+}
+
+/*Styling for NoteBook part of dashboard*/
+.notebook-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+.notebook {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.section {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.section h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.section label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.section input,
+.section select,
+.section textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.section textarea {
+    height: 100px;
+}
+
+.section button {
+    padding: 8px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #5a8746;
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+
+.section button:hover {
+    background-color: #3c622b;;
+}
+
+.tracker-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.tracker-item {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.tracker-item h4 {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.tracker-item p {
+    margin-bottom: 5px;
+}
