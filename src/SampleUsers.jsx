@@ -13,7 +13,7 @@ const sampleUsers = [
         phone: '1234567890',
         username: 'pregnant',
         password: 'L%KF(*$mdf92',
-        role: 'pregnantuser',
+        role: 'pregnant',
         weeksPregnant: 5,
         profession: null,
         licenseNumber: null,

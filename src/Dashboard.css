@@ -53,6 +53,35 @@
 }
 
 
+/*profile section of dashboard*/
+.profile-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.profile-card h2 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.profile-details {
+    margin-bottom: 10px;
+}
+
+.profile-details p {
+    margin-bottom: 5px;
+}
+
+.profile-details .bold {
+    font-weight: bold;
+}
+
+
 /* Community section of dashboard */
 .community-section {
     display: flex;
@@ -160,6 +189,9 @@
     margin-top: 20px;
 }
 
+
+
+
 /*SOS button in the safety section of the dashboard*/
 .sos-button {
     width: 100px;
@@ -216,86 +248,6 @@
     font-weight: bold; /* Bold text */
 }
 
-/*Styling for NoteBook part of dashboard*/
-.notebook-container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 20px;
-}
+/*Styling for toolkit part of dashboard*/
 
-.notebook {
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-}
 
-.section {
-    margin-bottom: 20px;
-    padding: 15px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.section h3 {
-    margin-top: 0;
-    margin-bottom: 10px;
-    font-size: 18px;
-}
-
-.section label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.section input,
-.section select,
-.section textarea {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.section textarea {
-    height: 100px;
-}
-
-.section button {
-    padding: 8px 15px;
-    font-size: 14px;
-    cursor: pointer;
-    background-color: #5a8746;
-    color: white;
-    border: none;
-    border-radius: 4px;
-}
-
-.section button:hover {
-    background-color: #3c622b;;
-}
-
-.tracker-list {
-    list-style-type: none;
-    padding: 0;
-}
-
-.tracker-item {
-    margin-bottom: 15px;
-    padding: 10px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.tracker-item h4 {
-    margin-top: 0;
-    margin-bottom: 5px;
-}
-
-.tracker-item p {
-    margin-bottom: 5px;
-}

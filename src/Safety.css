@@ -1,0 +1,115 @@
+.safety-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+
+
+.safety-section h2 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.safety-section form {
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 20px;
+}
+
+.safety-section label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.safety-section label input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.safety-section select {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0 15px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+
+/*for the delete/export health data or delete account buttons*/
+.button-container {
+    display: flex;
+    justify-content: space-between; /* Adjust spacing between buttons */
+}
+
+.safety-button {
+    flex: 1; /* Each button takes up equal space */
+    margin: 10px; /* Adjust margin as needed */
+    padding: 12px 20px; /* Adjust padding for button size */
+    background-color: #5a8746;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    /* Optional: Adjust font size and other styles */
+    font-size: 1rem;
+}
+
+.safety-button:hover {
+    background-color: #a31515; /* Lighten color on hover */
+}
+/*end for the delete/export health data or delete account buttons section*/
+
+
+.safety-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.safety-section h2 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.safety-section form {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+}
+
+.input-container input[type="password"] {
+    flex: 1; /* Take remaining space */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px; /* Spacing between input and button */
+}
+
+.submit-button {
+    padding: 10px 20px;
+    background-color: #5a8746;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #6cb556;
+}

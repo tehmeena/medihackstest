@@ -118,6 +118,8 @@ const App = () => {
         createCircle(currentUser, circleName, members);
     };
 
+
+
     //End circle creation code stuff 
 
     const handleLoginSubmit = (e) => {

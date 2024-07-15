@@ -2,7 +2,13 @@ import React, { useState, useEffect } from 'react';
 import './Dashboard.css';
 import Calendar from './Calendar.jsx';
 import Map from './Map.jsx';
-import './Safe.css';
+import './Safety.css';
+import './ToolKit.css';
+import contactsIcon from './directory.png';
+import circleIcon from './circle.png';
+import commIcon from './communitybrown.png';
+import './CommunityFeed.css';
+import './chatbox.css'
 
 //This is the dashboard code where every user gets redirected by logging or by completing the sign up process. 
 //The dashboard has a few components:
@@ -11,7 +17,7 @@ import './Safe.css';
 // a map/calendar tab where they can keep track of appointments, events, and see what resources are near them or if any events are happening nearby 
 //a safety section - which includes local tips and guidelines tailored to the user's location (in this case I'm just using some info relevant to NYC)
 //the safety section also can include training modules or educational resources, as well as an SOS feature
-//there's also a notebook section to keep record of all important documents, notes, and health trackers 
+//there's also a ToolKit section to keep record of all important documents, notes, and health trackers 
 
 //the features of the dashboard are common to different types of users, but there would be some specific characteristics of the dashboard...
 //...depending on the user's selected role. 
@@ -23,9 +29,8 @@ const Menu = ({ onSelect }) => {
         <div className="menu">
             <button onClick={() => onSelect('profile')}>Profile</button>
             <button onClick={() => onSelect('communityFeed')}>Community Feed</button>
-            <button onClick={() => onSelect('mapCalendar')}>Map/Calendar</button>
             <button onClick={() => onSelect('safety')}>Safety</button>
-            <button onClick={() => onSelect('notebook')}>Notebook</button>
+            <button onClick={() => onSelect('toolkit')}>ToolKit</button>
         </div>
     );
 };
@@ -53,86 +58,22 @@ const InviteCodeForm = ({ handleInviteCodeSubmit }) => {
     );
 };
 
+// Component for rotating alerts which will go in the alerts container of the safety section of the dashboard 
 
-const CommunityFeed = ({ selectedRole, user, users }) => {
-    return (
-        <div className="community-section">
-            {/* Left Side - Chatbox and Connections */}
-            <div className="left-side">
-                <div className="chatbox">
-                    <h3>Chatbox</h3>
-                    <div className="connections-panel">
-                        {/* Placeholder for connections (circles) */}
-                        <h4>Connections</h4>
-                        {/* Add your circles or connections here */}
-                        <div className="connection-circle"></div>
-                        <div className="connection-circle"></div>
-                        <div className="connection-circle"></div>
-                    </div>
-                </div>
-            </div>
 
-            {/* Right Side - Fetal Development / Directory and Alerts/News */}
-            <div className="right-side">
-                {/* Top Container */}
-                <div className="top-container">
-                    {selectedRole === 'pregnant' ? (
-                        <>
-                            <h3>Fetal Development</h3>
-                            {/* Placeholder for fetal development information */}
-                        </>
-                    ) : (
-                        <>
-                            <h3>Directory</h3>
-                            <Directory user={user} users={users} />
-                        </>
-                    )}
-                </div>
-
-                {/* Bottom Container */}
-                <div className="bottom-container" id="alert">
-                    <h3>Alerts/News</h3>
-                    <RotatingAlerts />
-                </div>
-            </div>
-        </div>
-    );
-};
-
-// Component for rotating alerts which will go in the alerts container of the communityfeed section of the dashboard 
-const RotatingAlerts = () => {
-    const alerts = [
-        "Baby formula brand XYZ recall - Check your supplies for affected batches.",
-        "Anonymous report of attack on ABC Hospital - Stay cautious if in the vicinity.",
-        "Blood donation request at  MaternityClinic on 123 Street. Your donation can save a life."
-    ];
-
-    const [currentAlertIndex, setCurrentAlertIndex] = useState(0);
+// Directory component for displaying user's connections, which will go into the communityfeed section 
 
 
 
-    // Automatically rotate alerts every 5 seconds
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentAlertIndex((prevIndex) => (prevIndex + 1) % alerts.length);
-        }, 3000);
-        return () => clearInterval(interval);
-    }, [alerts.length]);
-
-    return <p>{alerts[currentAlertIndex]}</p>;
-};
-
-// Directory component for displaying user's connections, which will go into the community section 
-const Directory = ({ user, users, selectedRole }) => {
-    // Filter connections based on the user's connections
-    const connections = users.filter(u => user.connections.includes(u.username));
-
+const Directory = ({ users }) => {
     return (
         <div className="directory">
-            <ul>
-                {connections.map((connection, index) => (
-                    <li key={index}>
-                        {connection.firstname} {connection.lastname} ({connection.role})
+            <h3>Directory</h3>
+            <ul className="user-list">
+                {users.map((user) => (
+                    <li key={user.id} className="user-item">
+                        <span className="user-name">{`${user.firstname} ${user.lastname}, `}</span>
+                        <span className="user-role">{user.role}</span>
                     </li>
                 ))}
             </ul>
@@ -141,11 +82,156 @@ const Directory = ({ user, users, selectedRole }) => {
 };
 
 
+const ChatBox = (user) => {
+    // Dummy data for demonstration (replace with actual chat data)
+    const conversations = [
+        { id: 1, sender: 'You', message: 'Hello there!' },
+        { id: 2, sender: 'Jane Smith', message: 'Hi John, how are you?' },
+        { id: 3, sender: 'You', message: 'Im doing great, thanks!' },
+        // Add more messages as needed
+    ];
+
+
+
+    return (
+        <div className="chatbox-container">
+            <h3 className="chatbox-title">Conversations</h3>
+            <div className="chatbox">
+                {conversations.map((message) => (
+                    <div key={message.id} className="message">
+                        <span className="sender">{message.sender}: </span>
+                        <span className="text">{message.message}</span>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+};
+
+
+
+{/* <div className="resource-of-the-week">
+<div>
+    <h2>Resource of the Week</h2>
+    <a href="https://www.youtube.com/watch?v=YE0RoETf0DM">Click here if you cannot see the video below</a>
+    <div className="youtube-video">
+        <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/YE0RoETf0DM?si=4jB_FUOA5GJQpya-"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen></iframe>
+    </div>
+</div>
+</div> */}
+
+
+
+/***** BEGIN COMMUNITY FEED COMPONENT *******/
+const CommunityFeed = ({ selectedRole, users }) => {
+    const [activeWidget, setActiveWidget] = useState(null);
+
+    const handleButtonClick = (index) => {
+        setActiveWidget(index);
+    };
+
+    const Newsfeed = () => {
+        return (
+            <div className="newsfeed-container">
+                <div className="discussion-forum">
+                    <h2>Discussion Forum</h2>
+                    <p>Start or join discussions about topics related to women's health.</p>
+                    {/* Add forum components here */}
+                </div>
+                <div className="health-centers-article">
+                    <h2>Women's Health Centers Near You</h2>
+                    <p>Discover articles about women's health centers in your area.</p>
+                    {/* Add article components here */}
+                </div>
+                <div className="youtube-video">
+                    <h2>Featured YouTube Video</h2>
+                    <div className="video-container">
+                        <iframe
+                            width="100%"
+                            height="315"
+                            src="https://www.youtube.com/embed/YE0RoETf0DM?si=4jB_FUOA5GJQpya-"
+                            title="YouTube video player"
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                        ></iframe>
+                    </div>
+                </div>
+            </div>
+        );
+    };
+    return (
+        <div className="community-section">
+
+            <div className="position-side">
+                <div className="button-container">
+                    <button className={`community-button ${activeWidget === 0 ? 'active' : ''}`} onClick={() => handleButtonClick(0)}>
+                        <img src={contactsIcon} alt="Contacts Icon" />
+                        My Contacts
+                    </button>
+                    <button className={`community-button ${activeWidget === 1 ? 'active' : ''}`} onClick={() => handleButtonClick(1)}>
+                        <img src={circleIcon} alt="Circle Icon" />
+                        My Circles
+                    </button>
+                    <button className={`community-button ${activeWidget === 2 ? 'active' : ''}`} onClick={() => handleButtonClick(2)}>
+                        <img src={commIcon} alt="Community Icon" />
+                        My Community
+                    </button>
+                </div>
+
+                {/* Widget Container */}
+                <div className="widget-container">
+                    {activeWidget === 0 && (
+                        <div className="widget">
+                            <Directory users={users} />
+                        </div>
+                    )}
+
+                    {activeWidget === 1 && (
+                        <div className="widget">
+                            <ChatBox />
+                        </div>
+                    )}
+
+                    {activeWidget === 2 && (
+                        <div className="widget">
+                            <Newsfeed />
+                        </div>
+                    )}
+                </div>
+            </div>
+        </div>
+    );
+};
+
+
+
+
+
+
+
+
+/***** END COMMUNITY FEED COMPONENT *******/
+
+
+
+
+
+
+
 //  Profile content
 
 const Profile = ({ user, handleInviteCodeSubmit }) => {
     return (
-        <div className="profile">
+        <div className="profile-card">
             <h2>Profile</h2>
             <div className="profile-details">
                 <p><span className="bold">First Name:</span> {user.firstname}</p>
@@ -163,31 +249,93 @@ const Profile = ({ user, handleInviteCodeSubmit }) => {
 };
 
 
+// const Safety = ({ users, user, emergencyContacts }) => {
+//     <div classname="safety">
+//         <Safety users={users} user={user} emergencyContacts={emergencyContacts} />
 
-const MapCalendar = ({ user, users, setUsers, CalendarComponent }) => {
-    return (
-        <div>
-            <Calendar />
-            <Map />
-        </div>
-    );
-};
+//     </div>
+
+// };
 
 
-const Safety = ({ user, users, emergencyContacts }) => {
-    // Sample emergency contacts, replace with actual data
-
+//Safety section of the dashboard! Sorry for hard coding it here oops 
+const Safety = ({ users }) => {
+    const emergencyContacts = users.map(user => ({
+        id: user.id,
+        name: `${user.firstname} ${user.lastname}`
+    }));
 
     const handleEmergencyContactChange = (e) => {
         const selectedContactId = parseInt(e.target.value);
-        // Logic to handle selected emergency contact
         console.log(`Selected emergency contact ID: ${selectedContactId}`);
     };
 
     const handleSOSClick = () => {
-        // Notify users and redirect
+        // Perform the notification action
         alert("All members of your circle have been notified. Head to your circle chat if you would like to make a phone or video call.");
+
+        // Navigate back to the community section
         window.location.href = "#community-section"; // Replace with the actual ID of your community section
+    };
+
+    const handleHealthDataConsentChange = (e) => {
+        const selectedUserId = parseInt(e.target.value);
+        console.log(`Health data consent granted to user ID: ${selectedUserId}`);
+    };
+
+    const handleExportData = () => {
+        const confirmation = window.confirm('Are you sure you wish to proceed? Make sure you have your records saved somewhere safe if you need them in the future.');
+        if (confirmation) {
+            console.log('Exporting health data');
+        }
+    };
+
+    const handleExportAndDeleteData = () => {
+        const confirmation = window.confirm('Are you sure you wish to proceed? Make sure you have your records saved somewhere safe if you need them in the future.');
+        if (confirmation) {
+            console.log('Exporting and deleting health data');
+        }
+    };
+
+    const handleDeleteData = () => {
+        const confirmation = window.confirm('Are you sure you wish to proceed? Make sure you have your records saved somewhere safe if you need them in the future.');
+        if (confirmation) {
+            console.log('Deleting health data');
+        }
+    };
+
+    const handleDeleteAccount = () => {
+        const confirmation = window.confirm('Are you sure you wish to delete your account?');
+        if (confirmation) {
+            console.log('Account deleted');
+        }
+    };
+
+    const handlePasskeySubmit = (e) => {
+        e.preventDefault();
+        const passkey = e.target.passkey.value;
+        console.log(`Passkey submitted: ${passkey}`);
+    };
+
+    const RotatingAlerts = () => {
+        const alerts = [
+            "Baby formula brand XYZ recall - Check your supplies for affected batches.",
+            "Anonymous report of attack on ABC Hospital - Stay cautious if in the vicinity.",
+            "Blood donation request at  MaternityClinic on 123 Street. Your donation can save a life."
+        ];
+
+        const [currentAlertIndex, setCurrentAlertIndex] = useState(0);
+
+
+        // Automatically rotate alerts every 5 seconds
+        useEffect(() => {
+            const interval = setInterval(() => {
+                setCurrentAlertIndex((prevIndex) => (prevIndex + 1) % alerts.length);
+            }, 3000);
+            return () => clearInterval(interval);
+        }, [alerts.length]);
+
+        return <p>{alerts[currentAlertIndex]}</p>;
     };
 
     return (
@@ -196,11 +344,11 @@ const Safety = ({ user, users, emergencyContacts }) => {
             <form>
                 <label>
                     <input type="checkbox" name="locationPreference" />
-                    Keep my location turned on to see resources near me
+                    Do you want to enable location services to find nearby resources and services? (You can also download data offline!)
                 </label>
                 <br />
                 <label>
-                    Emergency Contact:
+                    Select your emergency contact:
                     <select onChange={handleEmergencyContactChange}>
                         {emergencyContacts.map(contact => (
                             <option key={contact.id} value={contact.id}>
@@ -209,25 +357,46 @@ const Safety = ({ user, users, emergencyContacts }) => {
                         ))}
                     </select>
                 </label>
-            </form>
-
-            <div className="resource-of-the-week">
-                <div>
-                    <h2>Resource of the Week</h2>
-                    <a href="https://www.youtube.com/watch?v=YE0RoETf0DM">Click here if you cannot see the video below</a>
-                    <div className="youtube-video">
-                        <iframe
-                            width="560"
-                            height="315"
-                            src="https://www.youtube.com/watch?v=YE0RoETf0DM"
-                            title="YouTube video player"
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                        ></iframe>
-                    </div>
+                <br />
+                <label>
+                    Who do you consent to share your health data with if necessary?
+                </label>
+                <div className="checkbox-list">
+                    {users.map(user => (
+                        <label key={user.id}>
+                            <input
+                                type="checkbox"
+                                value={user.id}
+                                onChange={handleHealthDataConsentChange}
+                            />
+                            {user.firstname} {user.lastname}
+                        </label>
+                    ))}
                 </div>
+            </form>
+            <div className="safety-section">
+                <h2>Safe Preferences</h2>
+                <form>
+                    {/* Other form elements */}
+                </form>
+
+                <div className="button-container">
+                    <button className="safety-button" onClick={handleExportData}>Export my health data</button>
+                    <button className="safety-button" onClick={handleExportAndDeleteData}>Export and delete my health data</button>
+                    <button className="safety-button" onClick={handleDeleteData}>Delete my health data</button>
+                    <button className="safety-button" onClick={handleDeleteAccount}>Delete my account</button>
+                </div>
+
+                {/* Rest of your safety section */}
             </div>
+
+            <form onSubmit={handlePasskeySubmit}>
+                <label>
+                    Add password to safeguard your ToolKit:
+                    <input type="text" name="passkey" />
+                </label>
+                <button type="submit">Submit</button>
+            </form>
 
             <div className="info-container">
                 <h2>Resources for Mothers in New York City</h2>
@@ -300,79 +469,76 @@ const Safety = ({ user, users, emergencyContacts }) => {
                         <strong>NYC Health + Hospitals:</strong> Offers prenatal classes, breastfeeding support, and childbirth education at various locations. <br />
                         Website: <a href="https://www.nychealthandhospitals.org/patients-visitors/maternity/" target="_blank" rel="noopener noreferrer">NYC Health + Hospitals Maternity Services</a> <br />
                         <strong>NYC Department of Health:</strong> Provides information on local birthing classes and resources. <br />
-                        Website: <a href="https://www1.nyc.gov/site/doh/health/health-topics/pregnancy-and-baby-health.page" target="_blank" rel="noopener noreferrer">Pregnancy and Baby Health</a>
+                        Website: <a href="https://www1.nyc.gov/site/doh/health/health-topics/pregnancy-and-childbirth.page" target="_blank" rel="noopener noreferrer">NYC Pregnancy and Childbirth Resources</a>
                     </p>
 
-                    <h3>Community-Based Organizations:</h3>
+                    <h3>Family Shelters and Support:</h3>
                     <p>
-                        <strong>The Bronx Health Link:</strong> Offers education, advocacy, and support services for pregnant women and new mothers in the Bronx. <br />
-                        Website: <a href="https://www.bronxhealthlink.org/" target="_blank" rel="noopener noreferrer">The Bronx Health Link</a> <br />
-                        <strong>Caribbean Women's Health Association:</strong> Provides maternal and child health services, including prenatal care and parenting classes. <br />
-                        Website: <a href="https://www.cwha.org/" target="_blank" rel="noopener noreferrer">Caribbean Women's Health Association</a>
+                        <strong>Department of Homeless Services (DHS):</strong> Provides shelter and services for families in need. <br />
+                        Website: <a href="https://www1.nyc.gov/site/dhs/index.page" target="_blank" rel="noopener noreferrer">NYC DHS</a>
                     </p>
                 </div>
             </div>
 
-
-            <div className="sos-section">
-                <button className="sos-button" onClick={handleSOSClick}>SOS</button>
-                <p className="sos-text">In case of an emergency, pressing the SOS button will alert your circle members and share your location.</p>
+            <div className="bottom-container" id="alert">
+                <h3>ALERTS</h3>
+                <RotatingAlerts />
             </div>
+
+            <button className="sos-button" onClick={handleSOSClick}>SOS</button>
+            <p className="sos-text">In case of an emergency, pressing the SOS button will alert your circle members and share your location.</p>
         </div>
     );
-
 };
 
-//notebook section for tracker tools and record keeping of all sorts! 
-const Notebook = () => {
-    // State for tracker form inputs
+
+
+
+
+
+//ToolKit section for tracker tools and record keeping of all sorts!  
+
+const ToolKit = () => {
     const [trackerName, setTrackerName] = useState('');
     const [trackFrequency, setTrackFrequency] = useState('');
     const [syncToCalendar, setSyncToCalendar] = useState(false);
     const [trackerNotes, setTrackerNotes] = useState('');
+    const [counterValue, setCounterValue] = useState(0);
     const [trackerList, setTrackerList] = useState([]);
 
-    // State for counter
-    const [counterValue, setCounterValue] = useState(0);
-
-    // Handler for submitting tracker form
-    const handleSubmitTracker = (event) => {
-        event.preventDefault();
-        if (trackerName.trim() !== '' && trackFrequency.trim() !== '') {
-            const newTracker = {
-                name: trackerName,
-                frequency: trackFrequency,
-                syncToCalendar: syncToCalendar,
-                notes: trackerNotes,
-            };
-            setTrackerList([...trackerList, newTracker]);
-            // Clear form inputs after submission
-            setTrackerName('');
-            setTrackFrequency('');
-            setSyncToCalendar(false);
-            setTrackerNotes('');
-        }
+    const handleSubmitTracker = (e) => {
+        e.preventDefault();
+        const newTracker = {
+            name: trackerName,
+            frequency: trackFrequency,
+            syncToCalendar,
+            notes: trackerNotes,
+        };
+        setTrackerList([...trackerList, newTracker]);
+        setTrackerName('');
+        setTrackFrequency('');
+        setSyncToCalendar(false);
+        setTrackerNotes('');
     };
 
-    // Handler for updating counter value
-    const handleCounterChange = (event) => {
-        setCounterValue(parseInt(event.target.value, 10));
+    const handleCounterChange = (e) => {
+        setCounterValue(e.target.value);
     };
 
     const incrementCounter = () => {
-        setCounterValue(counterValue + 1);
+        setCounterValue((prevValue) => parseInt(prevValue) + 1);
     };
 
     const decrementCounter = () => {
-        setCounterValue(counterValue - 1);
+        setCounterValue((prevValue) => (prevValue > 0 ? parseInt(prevValue) - 1 : 0));
     };
 
     return (
-        <div className="notebook-container">
-            <div className="notebook">
+        <div className="toolkit-container">
+            <div className="toolkit">
                 {/* Dropdown menu for viewing options */}
                 <div className="dropdown section">
-                    <h3>View my Documentss</h3>
+                    <h3>View My Documents</h3>
                     <select>
                         <option value="medical_records">Medical Records</option>
                         <option value="antenatal_cards">Pregnancy Antenatal Cards</option>
@@ -382,7 +548,7 @@ const Notebook = () => {
                         <option value="reimbursements">Reimbursements</option>
                         <option value="patient_notes">Patient Notes</option>
                         <option value="health_insur">Health Insurance Card</option>
-                        <option value="health_insur">Identification Card</option>
+                        <option value="id_card">Identification Card</option>
                     </select>
                 </div>
 
@@ -400,14 +566,11 @@ const Notebook = () => {
                         />
 
                         <label htmlFor="trackFrequency">How often do you want to track it?</label>
-
                         <select
                             id="trackFrequency"
                             value={trackFrequency}
                             onChange={(e) => setTrackFrequency(e.target.value)}
                             required
-                            className="tracker section"
-
                         >
                             <option value="">Select Frequency</option>
                             <option value="hourly">Hourly</option>
@@ -440,9 +603,6 @@ const Notebook = () => {
                 </div>
 
                 {/* Counter section */}
-
-
-
                 <div className="counter section">
                     <h3>Counter</h3>
                     <label htmlFor="counterInput">Contractions/Baby kicks/Nausea...</label>
@@ -471,10 +631,13 @@ const Notebook = () => {
                     </ul>
                 </div>
             </div>
+            <div className="toolkit-extras">
+                <Calendar />
+                <Map />
+            </div>
         </div>
     );
 };
-
 
 const DashboardLayout = ({ user, users, setUsers, selectedRole
 
@@ -511,13 +674,6 @@ const DashboardLayout = ({ user, users, setUsers, selectedRole
         name: `${user.firstname} ${user.lastname}`
     }));
 
-    const handleSOSClick = () => {
-        // Perform the notification action
-        alert("All members of your circle have been notified. Head to your circle chat if you would like to make a phone or video call.");
-
-        // Navigate back to the community section
-        window.location.href = "#community-section"; // Replace with the actual ID of your community section
-    };
 
     // Function to render content based on selected section
     const renderContent = () => {
@@ -526,12 +682,10 @@ const DashboardLayout = ({ user, users, setUsers, selectedRole
                 return <Profile user={user} handleInviteCodeSubmit={handleInviteCodeSubmit} />;
             case 'communityFeed':
                 return <CommunityFeed selectedRole={selectedRole} user={user} users={users} Directory={Directory} />;
-            case 'mapCalendar':
-                return <MapCalendar user={user} users={users} setUsers={setUsers} />;
             case 'safety':
                 return <Safety user={user} users={users} emergencyContacts={emergencyContacts} />;
-            case 'notebook':
-                return <Notebook />;
+            case 'toolkit':
+                return <ToolKit user={user} users={users} setUsers={setUsers} />;
             default:
                 return <CommunityFeed selectedRole={selectedRole} user={user} users={users} />;
         }

@@ -1,5 +1,5 @@
 import React from 'react';
-import './Calendar.css';
+//import './Calendar.css';
 
 const Calendar = () => {
     const currentDate = new Date();
@@ -7,31 +7,39 @@ const Calendar = () => {
     const month = currentDate.toLocaleString('default', { month: 'long' });
 
     const daysInMonth = new Date(year, currentDate.getMonth() + 1, 0).getDate();
-    const firstDayOfMonth = new Date(year, currentDate.getMonth(), 1).getDay();
+    const firstDayIndex = new Date(year, currentDate.getMonth(), 1).getDay();
 
-    // Generate array of days in the month
-    const daysArray = [...Array(daysInMonth).keys()];
+    const generateCalendar = () => {
+        const calendarDays = [];
+        for (let i = 0; i < firstDayIndex; i++) {
+            calendarDays.push(<div key={`empty-${i}`} className="calendar-day empty"></div>);
+        }
+        for (let day = 1; day <= daysInMonth; day++) {
+            calendarDays.push(
+                <div key={day} className="calendar-day">
+                    {day}
+                </div>
+            );
+        }
+        return calendarDays;
+    };
 
     return (
         <div className="calendar-container">
-            <div className="calendar">
-                <h2 className="calendar-header">{month} {year}</h2>
-                <div className="weekdays">
-                    <div>Sun</div>
-                    <div>Mon</div>
-                    <div>Tue</div>
-                    <div>Wed</div>
-                    <div>Thu</div>
-                    <div>Fri</div>
-                    <div>Sat</div>
-                </div>
-                <div className="days">
-                    {daysArray.map((day) => (
-                        <div key={day + 1} className={`day ${day + 1 === currentDate.getDate() ? 'today' : ''}`}>
-                            {day + 1}
-                        </div>
-                    ))}
-                </div>
+            <div className="calendar-header">
+                <button className="prev-button">&lt;</button>
+                <div className="calendar-month">{`${month} ${year}`}</div>
+                <button className="next-button">&gt;</button>
+            </div>
+            <div className="calendar-grid">
+                <div className="calendar-day-name">Sun</div>
+                <div className="calendar-day-name">Mon</div>
+                <div className="calendar-day-name">Tue</div>
+                <div className="calendar-day-name">Wed</div>
+                <div className="calendar-day-name">Thu</div>
+                <div className="calendar-day-name">Fri</div>
+                <div className="calendar-day-name">Sat</div>
+                {generateCalendar()}
             </div>
         </div>
     );

@@ -2,7 +2,7 @@ import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet'; // Import Leaflet library (needed for creating custom icons)
 import 'leaflet/dist/leaflet.css';
-import './Map.css'
+//import './Map.css';
 
 // Import your custom icon images
 import hospitalIcon from './hospital-icon.png';
@@ -29,51 +29,24 @@ const Map = () => {
         { name: 'CPR Clinic at W 127th St', position: [40.811, -73.950], icon: calendarIcon, description: 'CPR for adults and infants on January 2, 2025 at 8AM. Add to calendar?' }
     ];
 
-    // Custom icons configuration
-    const hospitalMarker = new L.Icon({
-        iconUrl: hospitalIcon,
-        iconSize: [32, 32], // size of the icon
-        iconAnchor: [16, 32], // point of the icon which will correspond to marker's location
-        popupAnchor: [0, -32] // point from which the popup should open relative to the iconAnchor
-    });
-
-    const clinicMarker = new L.Icon({
-        iconUrl: clinicIcon,
-        iconSize: [32, 32],
-        iconAnchor: [16, 32],
-        popupAnchor: [0, -32]
-    });
-
-    const gymMarker = new L.Icon({
-        iconUrl: gymIcon,
-        iconSize: [32, 32],
-        iconAnchor: [16, 32],
-        popupAnchor: [0, -32]
-    });
-
-    const shelterMarker = new L.Icon({
-        iconUrl: shelterIcon,
-        iconSize: [32, 32],
-        iconAnchor: [16, 32],
-        popupAnchor: [0, -32]
-    });
-
-    const pilatesMarker = new L.Icon({
-        iconUrl: calendarIcon,
-        iconSize: [32, 32],
-        iconAnchor: [16, 32],
-        popupAnchor: [0, -32]
-    });
+    // Helper function to return appropriate marker icon
+    const getMarkerIcon = (iconUrl) => {
+        return new L.Icon({
+            iconUrl: iconUrl,
+            iconSize: [32, 32],
+            iconAnchor: [16, 32],
+            popupAnchor: [0, -32]
+        });
+    };
 
     return (
-        <div className="map-container" style={{ float: 'right', width: '50%', height: '500px' }}>
+        <div className="map-container">
             <MapContainer center={center} zoom={14} style={{ width: '100%', height: '100%' }}>
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     maxZoom={18}
                 />
-                {/* Render markers for each location */}
                 {locations.map((location, index) => (
                     <Marker key={index} position={location.position} icon={getMarkerIcon(location.icon)}>
                         <Popup>{location.name}<br />{location.description}</Popup>
@@ -82,16 +55,6 @@ const Map = () => {
             </MapContainer>
         </div>
     );
-};
-
-// Helper function to return appropriate marker icon
-const getMarkerIcon = (iconUrl) => {
-    return new L.Icon({
-        iconUrl: iconUrl,
-        iconSize: [32, 32],
-        iconAnchor: [16, 32],
-        popupAnchor: [0, -32]
-    });
 };
 
 export default Map;
